@@ -1,0 +1,78 @@
+<!Doctype html>
+
+<!--Hyungi Kim 
+025 741 125
+INT 223 B
+LAB 4-->
+
+<html>
+	<head>
+		<title>Welcome Francis</title><!-- title called-->
+	</head>
+	<body>
+	<h1>User Profile: Francis</h1><!-- using of lvl 1 header-->
+		<nav>
+			<ul>
+				<li class="selected">Home</li>
+				<li class="selected">View user profile</li>
+				<li class="selected">Edit user profile</li><!-- uses of nav and unordered list-->
+	<div class = "main">
+		<div class="profile-pic">
+			<img src="httpL//lab4.exampe.org/user-francis.png" alt="Francis's Avatar" width=300 height= 300><!-- img src used-->
+		</div>
+		<div class="profile-details">
+			<span class="Username">Francis</span><!-- span tag -->
+		</div>
+		<div class="profile-details">
+			<span class="Birthday">1936-12-17</span>
+		</div>
+		<div class="user-timeline">
+			<ul id ="user-timeline-eventlist"></ul>
+		</div>
+	</div>
+	<script>
+		function add_user_registration_event (eventdate) {
+			var eventList = document.getElementById("user-timeline-eventlist"), 
+			a = document.createElement("li");
+			a.textContent = eventdate.toLocaleString() + ": Registered";
+			eventList.appendChild(a);
+			};<!-- takes date and added to event-->
+				
+				
+		function get_user_event_adder (msg) {
+			function user_event_adder () {
+			var eventList = document.getElementById("user-timeline-eventlist"), 
+				a = document.createElement("li");
+				a.textContent = msg;
+				eventList.appendChild(a);
+				};
+			return user_event_adder; 
+			};<!-- event adder-->
+		
+		var eventIndex = 0;
+		var events = [add_user_registration_event, 
+               get_user_event_adder('event 1 happened'), 
+               get_user_event_adder('event 2 happened'),
+			   get_user_event_adder('event 3 happened')
+			];
+			eventIndex = 0;
+			
+			
+		var delayed_Event_Launcher = function () {
+			if (eventIndex == 0){
+				events[eventIndex](new Date());
+				}
+			else{
+				events[eventIndex]();
+				}
+				
+			eventIndex++;
+
+			if (eventIndex < 4) 
+				setTimeout(delayed_Event_Launcher, 2000);
+			};<!-- delayed 2sec (2000 mili sec) for calling events function while index is less than 4-->
+
+		delayed_Event_Launcher();;
+	</script>
+	</body>
+</html>
